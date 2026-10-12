@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hang Tuah Robo Cup XII (HTRC XII)</title>
+  
+  <!-- Google Fonts: Orbitron & Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome untuk Icon -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: #070b12;
+      color: #ffffff;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* Background Grid Futuristis */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background-image: 
+        radial-gradient(circle at 50% 20%, rgba(0, 242, 254, 0.1) 0%, transparent 50%),
+        linear-gradient(to right, rgba(30, 45, 66, 0.15) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(30, 45, 66, 0.15) 1px, transparent 1px);
+      background-size: 100% 100%, 40px 40px, 40px 40px;
+      z-index: -1;
+    }
+
+    /* Navbar */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 5%;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(7, 11, 18, 0.85);
+      backdrop-filter: blur(12px);
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+    }
+
+    .nav-brand {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      letter-spacing: 1px;
+      color: #38bdf8;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.8rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: #94a3b8;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: #00f2fe;
+    }
+
+    /* Hero Section (Beranda) */
+    .hero-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      min-height: 100vh;
+      padding: 6rem 1rem 4rem 1rem;
+    }
+
+    .event-badge {
+      background: rgba(0, 242, 254, 0.1);
+      border: 1px solid rgba(0, 242, 254, 0.3);
+      color: #00f2fe;
+      padding: 6px 16px;
+      border-radius: 30px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 0 20px rgba(0, 242, 254, 0.2);
+    }
+
+    .hero-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(2.3rem, 5.5vw, 5rem);
+      font-weight: 900;
+      line-height: 1.1;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 1.2rem;
+      background: linear-gradient(135deg, #ffffff 30%, #38bdf8 70%, #00f2fe 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 40px rgba(0, 242, 254, 0.3);
+    }
+
+    .hero-subtitle {
+      color: #94a3b8;
+      font-size: clamp(0.95rem, 1.8vw, 1.2rem);
+      max-width: 650px;
+      margin-bottom: 2.5rem;
+      line-height: 1.6;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn {
+      padding: 0.85rem 2rem;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #00f2fe 0%, #0369a1 100%);
+      color: #ffffff;
+      border: none;
+      box-shadow: 0 4px 20px rgba(0, 242, 254, 0.4);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 25px rgba(0, 242, 254, 0.6);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: #ffffff;
+      border: 1px solid #1e2d42;
+    }
+
+    .btn-outline:hover {
+      border-color: #00f2fe;
+      background: rgba(0, 242, 254, 0.05);
+    }
+
+    /* Styling Umum Section */
+    section {
+      padding: 6rem 5% 4rem 5%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 0.5rem;
+      color: #ffffff;
+    }
+
+    .section-desc {
+      text-align: center;
+      color: #94a3b8;
+      margin-bottom: 3.5rem;
+      font-size: 0.95rem;
+    }
+
+    /* BADGE KATEGORI (SMP / SMA) */
+    .category-badges {
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .cat-tag {
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 6px;
+      letter-spacing: 0.5px;
+    }
+
+    .tag-smp {
+      background: rgba(56, 189, 248, 0.15);
+      color: #38bdf8;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+    }
+
+    .tag-sma {
+      background: rgba(16, 185, 129, 0.15);
+      color: #10b981;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    /* JADWAL SECTION */
+    .timeline-container {
+      position: relative;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .timeline-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 2px;
+      background: #1e2d42;
+      transform: translateX(-50%);
+    }
+
+    .timeline-item {
+      padding: 1.5rem 0;
+      position: relative;
+      width: 50%;
+    }
+
+    .timeline-item:nth-child(odd) {
+      left: 0;
+      padding-right: 2.5rem;
+      text-align: right;
+    }
+
+    .timeline-item:nth-child(odd) .category-badges {
+      justify-content: flex-end;
+    }
+
+    .timeline-item:nth-child(even) {
+      left: 50%;
+      padding-left: 2.5rem;
+      text-align: left;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      top: 2rem;
+      width: 16px;
+      height: 16px;
+      background: #00f2fe;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #00f2fe;
+    }
+
+    .timeline-item:nth-child(odd) .timeline-dot {
+      right: -8px;
+    }
+
+    .timeline-item:nth-child(even) .timeline-dot {
+      left: -8px;
+    }
+
+    .timeline-content {
+      background: #111c2a;
+      border: 1px solid #1e2d42;
+      padding: 1.5rem;
+      border-radius: 12px;
+      transition: border-color 0.3s;
+    }
+
+    .timeline-content:hover {
+      border-color: #00f2fe;
+    }
+
+    .timeline-date {
+      font-size: 0.85rem;
+      color: #00f2fe;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+    }
+
+    .timeline-content h3 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.1rem;
+      margin-bottom: 8px;
+    }
+
+    .timeline-content p {
+      color: #94a3b8;
+      font-size: 0.9rem;
+    }
+
+    /* GRID DIVISI PERLOMBAAN */
+    .divisi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .divisi-card {
+      background: #111c2a;
+      border: 1px solid #1e2d42;
+      border-radius: 12px;
+      padding: 2rem;
+      text-align: center;
+      transition: transform 0.3s, border-color 0.3s;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .divisi-card:hover {
+      transform: translateY(-5px);
+      border-color: #00f2fe;
+    }
+
+    .divisi-icon {
+      font-size: 2.5rem;
+      color: #00f2fe;
+      margin-bottom: 1rem;
+    }
+
+    .divisi-card h3 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.2rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .divisi-card .sub-title {
+      color: #38bdf8;
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+
+    .divisi-card p {
+      color: #94a3b8;
+      font-size: 0.9rem;
+      margin-bottom: 1.5rem;
+      line-height: 1.5;
+    }
+
+    .price-tag {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px dashed rgba(255, 255, 255, 0.15);
+      padding: 10px;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+    }
+
+    .price-tag span {
+      font-size: 0.8rem;
+      color: #94a3b8;
+      display: block;
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+    }
+
+    /* BAGIAN TENTANG HTRC */
+    .history-timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 4rem;
+    }
+
+    .history-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .history-image-frame {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid #1e2d42;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      transition: transform 0.3s, border-color 0.3s;
+      background-color: #111c2a;
+      min-height: 250px;
+    }
+
+    .history-image-frame:hover {
+      transform: scale(1.02);
+      border-color: #00f2fe;
+    }
+
+    .history-image-frame img {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .history-text-box h3 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .history-text-box h3 span {
+      color: #00f2fe;
+    }
+
+    .history-text-box p {
+      color: #94a3b8;
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+    /* BAGIAN PENDAFTARAN */
+    .reg-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+      align-items: stretch;
+    }
+
+    .reg-card {
+      background: #111c2a;
+      border: 1px solid #1e2d42;
+      border-radius: 16px;
+      padding: 2.5rem;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .reg-card h3 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+      color: #ffffff;
+    }
+
+    .qr-frame {
+      background: #ffffff;
+      padding: 15px;
+      border-radius: 12px;
+      display: inline-block;
+      margin: 1rem 0;
+      box-shadow: 0 0 20px rgba(0, 242, 254, 0.2);
+    }
+
+    .qr-frame img {
+      width: 180px;
+      height: 180px;
+      object-fit: contain;
+      display: block;
+    }
+
+    .reg-card p {
+      color: #94a3b8;
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+
+    .cp-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      width: 100%;
+      margin-top: 1rem;
+    }
+
+    .cp-item {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid #1e2d42;
+      padding: 1rem;
+      border-radius: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      text-align: left;
+    }
+
+    .cp-info h4 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1rem;
+      color: #ffffff;
+      margin-bottom: 3px;
+    }
+
+    .cp-info span {
+      color: #38bdf8;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .btn-wa {
+      background: rgba(16, 185, 129, 0.15);
+      color: #10b981;
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      padding: 8px 14px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.3s;
+    }
+
+    .btn-wa:hover {
+      background: #10b981;
+      color: #ffffff;
+    }
+
+    /* Responsive untuk Mobile */
+    @media (max-width: 900px) {
+      .history-row, .reg-container {
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem;
+      }
+      .history-row:nth-child(even) .history-image-frame {
+        order: -1; 
+      }
+    }
+
+    @media (max-width: 768px) {
+      .timeline-container::before {
+        left: 20px;
+      }
+      .timeline-item {
+        width: 100%;
+        padding-left: 50px !important;
+        padding-right: 0 !important;
+        text-align: left !important;
+      }
+      .timeline-item:nth-child(even) {
+        left: 0;
+      }
+      .timeline-item:nth-child(odd) .category-badges {
+        justify-content: flex-start;
+      }
+      .timeline-item:nth-child(odd) .timeline-dot,
+      .timeline-item:nth-child(even) .timeline-dot {
+        left: 12px;
+      }
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 3rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      color: #64748b;
+      font-size: 0.85rem;
+      margin-top: 4rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav>
+    <div class="nav-brand"><i class="fa-solid fa-robot"></i> HTRC XII</div>
+    <ul class="nav-links">
+      <li><a href="#beranda">Beranda</a></li>
+      <li><a href="#jadwal">Jadwal</a></li>
+      <li><a href="#divisi">Divisi Perlombaan</a></li>
+      <li><a href="#tentang">Tentang HTRC</a></li>
+      <li><a href="#pendaftaran">Pendaftaran</a></li>
+    </ul>
+  </nav>
+
+  <!-- 1. BAGIAN BERANDA -->
+  <section id="beranda" class="hero-section">
+    <div class="event-badge">
+      <i class="fa-solid fa-bolt"></i> Kompetisi Robotika Nasional
+    </div>
+    
+    <h1 class="hero-title">Hang Tuah Robo Cup XII</h1>
+    
+    <p class="hero-subtitle">
+      Ajang kompetisi Robot Transporter tingkat Nasional untuk kategori SMP dan SMA sederajat. Buktikan ketangkasan dan inovasi tim robotikamu!
+    </p>
+
+    <div class="hero-buttons">
+      <a href="#pendaftaran" class="btn btn-primary">Daftar Sekarang <i class="fa-solid fa-arrow-right"></i></a>
+      <a href="#jadwal" class="btn btn-outline">Lihat Jadwal <i class="fa-solid fa-calendar-days"></i></a>
+    </div>
+  </section>
+
+  <!-- 2. BAGIAN JADWAL -->
+  <section id="jadwal">
+    <h2 class="section-title">Jadwal & Timeline</h2>
+    <p class="section-desc">Catat tanggal penting rangkaian kegiatan HTRC XII untuk kategori SMP dan SMA</p>
+
+    <div class="timeline-container">
+      
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-date">9 September - 7 Oktober 2026</div>
+          <h3>Pendaftaran Gelombang I</h3>
+          <p>Periode pendaftaran tahap awal dengan biaya khusus bagi tim tingkat SMP dan SMA.</p>
+          <div class="category-badges">
+            <span class="cat-tag tag-smp">SMP</span>
+            <span class="cat-tag tag-sma">SMA</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-date">12 Oktober - 12 November 2026</div>
+          <h3>Pendaftaran Gelombang II</h3>
+          <p>Kesempatan kedua pendaftaran bagi peserta tingkat SMP dan SMA.</p>
+          <div class="category-badges">
+            <span class="cat-tag tag-smp">SMP</span>
+            <span class="cat-tag tag-sma">SMA</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-date">8 Desember 2026</div>
+          <h3>Technical Meeting (TM)</h3>
+          <p>Penjelasan teknis perlombaan dan regulasi arena untuk seluruh peserta.</p>
+          <div class="category-badges">
+            <span class="cat-tag tag-smp">SMP</span>
+            <span class="cat-tag tag-sma">SMA</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-date">21 Desember 2026</div>
+          <h3>Hari Pertandingan (Match Day)</h3>
+          <p>Babak kompetisi utama penentuan juara kategori SMP dan SMA.</p>
+          <div class="category-badges">
+            <span class="cat-tag tag-smp">SMP</span>
+            <span class="cat-tag tag-sma">SMA</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 3. BAGIAN DIVISI PERLOMBAAN -->
+  <section id="divisi">
+    <h2 class="section-title">Divisi Perlombaan</h2>
+    <p class="section-desc">Kategori kompetisi Robot Transporter beserta rincian biaya pendaftaran</p>
+    
+    <div class="divisi-grid">
+      <!-- Kategori SMP -->
+      <div class="divisi-card">
+        <div>
+          <div class="divisi-icon"><i class="fa-solid fa-truck-ramp-box"></i></div>
+          <h3>Robot Transporter SMP</h3>
+          <div class="sub-title">Tingkat SMP / Sederajat</div>
+          <p>Kompetisi mengendalikan robot transporter untuk memindahkan objek rintangan di arena dengan presisi dan kecepatan terbaik.</p>
+        </div>
+        <div>
+          <div class="price-tag">
+            <span>Biaya Pendaftaran</span>
+            Rp 200.000
+          </div>
+          <span class="cat-tag tag-smp" style="display:inline-block; padding: 6px 14px;">Kategori SMP</span>
+        </div>
+      </div>
+
+      <!-- Kategori SMA -->
+      <div class="divisi-card">
+        <div>
+          <div class="divisi-icon"><i class="fa-solid fa-truck-ramp-box"></i></div>
+          <h3>Robot Transporter SMA</h3>
+          <div class="sub-title">Tingkat SMA / Sederajat</div>
+          <p>Kompetisi robot transporter tingkat SMA dengan rintangan arena yang lebih kompleks, menguji efisiensi mekanika dan strategi tim.</p>
+        </div>
+        <div>
+          <div class="price-tag">
+            <span>Biaya Pendaftaran</span>
+            Rp 250.000
+          </div>
+          <span class="cat-tag tag-sma" style="display:inline-block; padding: 6px 14px;">Kategori SMA</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. BAGIAN TENTANG HTRC (FOTO HTRC1.jpeg - HTRC7.jpeg) -->
+  <section id="tentang">
+    <h2 class="section-title">Sejarah & Perjalanan HTRC</h2>
+    <p class="section-desc">Mengenal jejak langkah Hang Tuah Robo Cup dari masa ke masa</p>
+
+    <div class="history-timeline">
+      
+      <!-- BARIS 1: HTRC2.jpeg -->
+      <div class="history-row">
+        <div class="history-image-frame">
+          <img src="HTRC2.jpeg" onerror="this.onerror=null; this.src='HTRC2.jpg';" alt="HTRC 2">
+        </div>
+        <div class="history-text-box">
+          <h3>Awal Mula <span>Lahirnya HTRC</span></h3>
+          <p>
+            Hang Tuah Robo Cup (HTRC) pertama kali digagas oleh Himpunan Mahasiswa Teknik Elektro Universitas Hang Tuah sebagai wadah awal bagi para pelajar untuk mengasah keterampilan teknologi dan mekatronika.
+          </p>
+        </div>
+      </div>
+
+      <!-- BARIS 2: HTRC5.jpeg -->
+      <div class="history-row">
+        <div class="history-text-box">
+          <h3>Semangat <span>Kompetisi Nasional</span></h3>
+          <p>
+            Seiring berjalannya waktu, HTRC berkembang pesat menjadi event robotika bergengsi yang dihadiri oleh ratusan peserta dari berbagai sekolah di Indonesia dengan antusiasme yang luar biasa.
+          </p>
+        </div>
+        <div class="history-image-frame">
+          <img src="HTRC5.jpeg" onerror="this.onerror=null; this.src='HTRC5.jpg';" alt="HTRC 5">
+        </div>
+      </div>
+
+      <!-- BARIS 3: HTRC3.jpeg -->
+      <div class="history-row">
+        <div class="history-image-frame">
+          <img src="HTRC3.jpeg" onerror="this.onerror=null; this.src='HTRC3.jpg';" alt="HTRC 3">
+        </div>
+        <div class="history-text-box">
+          <h3>Uji Ketangkasan <span>Di Arena</span></h3>
+          <p>
+            Para peserta menguji rancangan robot terbaik mereka di atas arena kompetisi yang ketat, menguji kecepatan, strategi, serta ketepatan sistem kendali robot.
+          </p>
+        </div>
+      </div>
+
+      <!-- BARIS 4: HTRC6.jpeg -->
+      <div class="history-row">
+        <div class="history-text-box">
+          <h3>Konsistensi <span>Inovasi Teknologi</span></h3>
+          <p>
+            Setiap tahunnya, tantangan dan rintangan di arena selalu diperbarui untuk mendorong kreativitas peserta dalam menciptakan inovasi mekanika robot yang handal.
+          </p>
+        </div>
+        <div class="history-image-frame">
+          <img src="HTRC6.jpeg" onerror="this.onerror=null; this.src='HTRC6.jpg';" alt="HTRC 6">
+        </div>
+      </div>
+
+      <!-- BARIS 5: HTRC7.jpeg -->
+      <div class="history-row">
+        <div class="history-image-frame">
+          <img src="HTRC7.jpeg" onerror="this.onerror=null; this.src='HTRC7.jpg';" alt="HTRC 7">
+        </div>
+        <div class="history-text-box">
+          <h3>Penilaian & Verifikasi <span>Oleh Dewan Juri</span></h3>
+          <p>
+            Proses pertandingan dikawal secara profesional melalui pemeriksaan teknis dan rekapitulasi skor yang transparan oleh tim juri yang ahli di bidangnya.
+          </p>
+        </div>
+      </div>
+
+      <!-- BARIS 6: HTRC4.jpeg -->
+      <div class="history-row">
+        <div class="history-text-box">
+          <h3>Prestasi & <span>Penghargaan Bergengsi</span></h3>
+          <p>
+            Piala, plakat penghargaan, serta total hadiah pembinaan diperebutkan oleh tim-tim terbaik sebagai simbol pencapaian atas kerja keras mereka.
+          </p>
+        </div>
+        <div class="history-image-frame">
+          <img src="HTRC4.jpeg" onerror="this.onerror=null; this.src='HTRC4.jpg';" alt="HTRC 4">
+        </div>
+      </div>
+
+      <!-- BARIS 7: HTRC1.jpeg -->
+      <div class="history-row">
+        <div class="history-image-frame">
+          <img src="HTRC1.jpeg" onerror="this.onerror=null; this.src='HTRC1.jpg';" alt="HTRC 1">
+        </div>
+        <div class="history-text-box">
+          <h3>Menuju <span>HTRC XII</span></h3>
+          <p>
+            Memasuki tahun ke-12, HTRC XII siap kembali menyambut para inovator muda melalui divisi <strong>Robot Transporter</strong> untuk kategori SMP dan SMA. Mari ukir sejarah baru!
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 5. BAGIAN PENDAFTARAN (QR & CP) -->
+  <section id="pendaftaran">
+    <h2 class="section-title">Pendaftaran Tim</h2>
+    <p class="section-desc">Scan QR Code di bawah untuk mendaftar atau hubungi Contact Person jika ada pertanyaan</p>
+
+    <div class="reg-container">
+      
+      <!-- Scan QR Pendaftaran -->
+      <div class="reg-card">
+        <h3><i class="fa-solid fa-qrcode" style="color: #00f2fe; margin-right: 8px;"></i> Scan QR Pendaftaran</h3>
+        <p>Arahkan kamera HP atau scan menggunakan aplikasi pemindai untuk mengakses formulir pendaftaran.</p>
+        <div class="qr-frame">
+          <img src="QRDAFTAR.png" onerror="this.onerror=null; this.src='https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=HTRCXII';" alt="QR Code Pendaftaran HTRC XII">
+        </div>
+      </div>
+
+      <!-- Contact Person -->
+      <div class="reg-card">
+        <h3><i class="fa-solid fa-headset" style="color: #00f2fe; margin-right: 8px;"></i> Hubungi Panitia (CP)</h3>
+        <p>Butuh bantuan seputar pendaftaran atau teknis lomba? Silakan hubungi panitia kami:</p>
+
+        <div class="cp-list">
+          
+          <!-- CP 1: Ilham -->
+          <div class="cp-item">
+            <div class="cp-info">
+              <h4>Ilham</h4>
+              <span>+62 881-0260-42999</span>
+            </div>
+            <a href="https://wa.me/62881026042999" target="_blank" class="btn-wa">
+              <i class="fa-brands fa-whatsapp"></i> Chat
+            </a>
+          </div>
+
+          <!-- CP 2: Chandra -->
+          <div class="cp-item">
+            <div class="cp-info">
+              <h4>Chandra</h4>
+              <span>+62 895-6229-83504</span>
+            </div>
+            <a href="https://wa.me/62895622983504" target="_blank" class="btn-wa">
+              <i class="fa-brands fa-whatsapp"></i> Chat
+            </a>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2026 Hang Tuah Robo Cup XII (HTRC XII). All Rights Reserved.</p>
+  </footer>
+
+</body>
+</html>
